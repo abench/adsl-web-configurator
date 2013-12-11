@@ -24,11 +24,11 @@ def pppoe(success):
         adminPassword = "admin"
         login(adminUser, adminPassword)
         portLocator = "//blockquote/form/div/table/tbody/tr[1]/td[2]/input"
-        # portLocator
+        # port
         wd.find_element_by_xpath(portLocator).click()
         wd.find_element_by_xpath(portLocator).clear()
         wd.find_element_by_xpath(portLocator).send_keys("0")
-        #vpiLocator
+        #vpi
         vpiLocator = "//blockquote/form/div/table/tbody/tr[2]/td[2]/input"
         wd.find_element_by_xpath(vpiLocator).click()
         wd.find_element_by_xpath(vpiLocator).clear()
@@ -41,31 +41,44 @@ def pppoe(success):
         
         
         # press next
-        wd.find_element_by_xpath("//blockquote/form/center/input").click()
+        nextButtonLocator = "//blockquote/form/center/input"
+        wd.find_element_by_xpath(nextButtonLocator).click()
         
-        
-        wd.find_element_by_xpath("//blockquote/form/table/tbody/tr[3]/td/input").click()
-        wd.find_element_by_xpath("//blockquote/form/p[2]/input[2]").click()
-        
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[1]/td[2]/input").click()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[1]/td[2]/input").clear()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[1]/td[2]/input").send_keys("admin")
-        
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[2]/td[2]/input").click()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[2]/td[2]/input").clear()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[2]/td[2]/input").send_keys("admin")
-        
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[3]/td[2]/input").click()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[3]/td[2]/input").clear()
-        wd.find_element_by_xpath("//blockquote/form/table[1]/tbody/tr[3]/td[2]/input").send_keys("admin")
-        
-        wd.find_element_by_xpath("//blockquote/form/center/input[2]").click()
-        
-        wd.find_element_by_xpath("//blockquote/form/center/input[2]").click()
-        
-        wd.find_element_by_xpath("//blockquote/form/center/input[2]").click()
-        
-        wd.find_element_by_xpath("//blockquote/form/center/input[2]").click()
+        # select PPP over Ethernet
+        pppoeSelectLocator = "//blockquote/form/table/tbody/tr[3]/td/input"
+        wd.find_element_by_xpath(pppoeSelectLocator).click()
+        # press next button
+        nextButton1Locator = "//blockquote/form/p[2]/input[2]"
+        wd.find_element_by_xpath(nextButton1Locator).click()
+        # enter pppoe username
+        pppoeUsernameLocator = "//blockquote/form/table[1]/tbody/tr[1]/td[2]/input"
+        pppoeUserName = "admin"
+        wd.find_element_by_xpath(pppoeUsernameLocator).click()
+        wd.find_element_by_xpath(pppoeUsernameLocator).clear()        
+        wd.find_element_by_xpath(pppoeUsernameLocator).send_keys(pppoeUserName)
+        # enter pppoe password
+        pppoePasswordLocator = "//blockquote/form/table[1]/tbody/tr[2]/td[2]/input"
+        pppoeUserPassword = "admin"
+        wd.find_element_by_xpath(pppoePasswordLocator).click()
+        wd.find_element_by_xpath(pppoePasswordLocator).clear()        
+        wd.find_element_by_xpath(pppoePasswordLocator).send_keys(pppoeUserPassword)
+        # confirm pppoe password
+        pppoePasswordConfirmLocator = "//blockquote/form/table[1]/tbody/tr[3]/td[2]/input"
+        wd.find_element_by_xpath(pppoePasswordConfirmLocator).click()
+        wd.find_element_by_xpath(pppoePasswordConfirmLocator).clear()
+        wd.find_element_by_xpath(pppoePasswordConfirmLocator).send_keys(pppoeUserPassword)
+        # press next
+        nextButton2Locator = "//blockquote/form/center/input[2]"
+        wd.find_element_by_xpath(nextButton2Locator).click()
+        # press next
+        nextButton3Locator = "//blockquote/form/center/input[2]"
+        wd.find_element_by_xpath(nextButton3Locator).click()
+        # press next
+        nextButton4Locator = "//blockquote/form/center/input[2]"
+        wd.find_element_by_xpath(nextButton4Locator).click()
+        # press save
+        nextButton5Locator = "//blockquote/form/center/input[2]"
+        wd.find_element_by_xpath(nextButton5Locator).click()
         
     finally:
         wd.quit()
