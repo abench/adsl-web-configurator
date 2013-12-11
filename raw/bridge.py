@@ -17,35 +17,58 @@ def is_alert_present(wd):
         return True
     except:
         return False
+# locators
+portLocator = "//blockquote/form/div/table/tbody/tr[1]/td[2]/input"
+vpiLocator = "//blockquote/form/div/table/tbody/tr[2]/td[2]/input"
+vciLocator = "//blockquote/form/div/table/tbody/tr[3]/td[2]/input"
+qosLocator = "//blockquote/form/div/div/table/tbody/tr/td[2]/input"
+
+
+def setText(wd, locator, text):
+    wd.find_element_by_xpath(locator).click()
+    wd.find_element_by_xpath(locator).clear()
+    wd.find_element_by_xpath(locator).send_keys(text)
+    
+def selectCheckbox(wd, locator):
+    if not wd.find_element_by_xpath(locator).is_selected():
+        wd.find_element_by_xpath(locator).click()
+        
+def clickButton(wd, locator):
+    wd.find_element_by_xpath(locator).click()        
+    
+
+def setPortNum(num):
+    setText(wd,portLocator,num)
+    
+def setVpi(num):
+    setText(wd,vpiLocator,num)
+    
+def setVci(num):
+    setText(wd,vciLocator,num)
+    
+def enableQoS():
+    selectCheckbox(wd, qosLocator)
+
 
 def bridge(success, wd):
     try:
         # login
         wd.get("http://admin:admin@192.168.1.1/")
         # port
-        portLocator = "//blockquote/form/div/table/tbody/tr[1]/td[2]/input"
+        
         portNum = "0"
-        wd.find_element_by_xpath(portLocator).click()
-        wd.find_element_by_xpath(portLocator).clear()        
-        wd.find_element_by_xpath(portLocator).send_keys(portNum)
+        setPortNum(portNum)
         # vpi
-        vpiLocator = "//blockquote/form/div/table/tbody/tr[2]/td[2]/input"
+        
         vpiNum = "0"
-        wd.find_element_by_xpath(vpiLocator).click()
-        wd.find_element_by_xpath(vpiLocator).clear()        
-        wd.find_element_by_xpath(vpiLocator).send_keys(vpiNum)
+        setVpi(vpiNum)
         #vci
-        vciLocator = "//blockquote/form/div/table/tbody/tr[3]/td[2]/input"
+        
         vciNum = "35"
-        wd.find_element_by_xpath(vciLocator).click()
-        wd.find_element_by_xpath(vciLocator).clear()        
-        wd.find_element_by_xpath(vciLocator).send_keys(vciNum)
+        setVci(vciNum)
+        
         # Enable Quality of service
-        qosLocator = "//blockquote/form/div/div/table/tbody/tr/td[2]/input"
-        if not wd.find_element_by_xpath(qosLocator).is_selected():
-            wd.find_element_by_xpath(qosLocator).click()
-        if wd.find_element_by_xpath(qosLocator).is_selected():
-            wd.find_element_by_xpath(qosLocator).click()
+        enableQoS()
         # press next    
         nextButtonLocator = "//blockquote/form/center/input"
         wd.find_element_by_xpath(nextButtonLocator).click()
