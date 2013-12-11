@@ -31,7 +31,12 @@ bridgingModeLocator = "//blockquote/form/table/tbody/tr[9]/td/input"
 enableBridgeServiceLocator = "//blockquote/form/p[2]/input[2]"
 enableBridgeSelectorLocator = "//blockquote/form/table/tbody/tr[1]/td[2]/input"
 nextButton2Locator = "//blockquote/form/center/input[2]"
+
 serviceNameLocator = "//blockquote/form/table/tbody/tr[2]/td[2]/input"
+modemIPLocator = "//blockquote/form/table/tbody/tr[1]/td[2]/input"
+modemNetMaskLocator="//blockquote/form/table/tbody/tr[2]/td[2]/input"
+
+
 
 def setText(wd, locator, text):
     wd.find_element_by_xpath(locator).click()
@@ -45,6 +50,10 @@ def selectCheckbox(wd, locator):
 def clickButton(wd, locator):
     wd.find_element_by_xpath(locator).click()        
     
+def unselectCheckBox(wd, locator):
+    if wd.find_element_by_xpath(locator).is_selected():
+        wd.find_element_by_xpath(locator).click()
+
 
 def setPortNum(num):
     setText(wd,portLocator,num)
@@ -64,12 +73,12 @@ def clickNextButton():
 def selectBridgingMode():
     clickButton(wd, bridgingModeLocator)
 
+def login(adminUser, adminPassword):
+    wd.get("http://" + adminUser + ":" + adminPassword + "@192.168.1.1/")
 
 
 
-def unselectCheckBox(wd, locator):
-    if wd.find_element_by_xpath(locator).is_selected():
-        wd.find_element_by_xpath(locator).click()
+
 
 def enableBridgeService():
     clickButton(wd, enableBridgeServiceLocator)    
@@ -80,67 +89,43 @@ def clickNextButton2():
     return wd.find_element_by_xpath(nextButton2Locator).click()
 
 
-def setServiceName(wd, serviceName):
+def setServiceName(serviceName):
     setText(wd, serviceNameLocator, serviceName)
 
 
-def setModemIP(wd, modemIPLocator, modemIP):
-    wd.find_element_by_xpath(modemIPLocator).click()
-    wd.find_element_by_xpath(modemIPLocator).clear()
-    wd.find_element_by_xpath(modemIPLocator).send_keys(modemIP)
+def setModemIP(modemIP):
+    setText(wd, modemIPLocator, modemIP)
+
+
+def setModemNetMask(modemNetMask):
+    setText(wd, modemNetMaskLocator, modemNetMask)
 
 def bridge(success, wd):
     try:
         # login
-        wd.get("http://admin:admin@192.168.1.1/")
-        # port
-        
+        adminUser = "admin"
+        adminPassword = "admin"
         portNum = "0"
-        setPortNum(portNum)
-        # vpi
-        
         vpiNum = "0"
-        setVpi(vpiNum)
-        #vci
-        
         vciNum = "35"
-        setVci(vciNum)
-        
-        # Enable Quality of service
-        enableQoS()
-        # press next    
-        clickNextButton()
-
-        # set bridging mode
-        selectBridgingMode()
-        
-        # set enable bridge service
-        
-        enableBridgeService(wd)
-        
-        # set service name
-        
         serviceName = "br_0_0_35"
-        
-        setServiceName(wd, serviceNameLocator, serviceName)
-        # press next
-        
-        clickNextButton2()
-        
-        # set modem ip
-        modemIPLocator = "//blockquote/form/table/tbody/tr[1]/td[2]/input"
         modemIP = "192.168.1.1"
-        
-        setModemIP(wd, modemIPLocator, modemIP)
-        # set net mask for modem
-        modemNetMaskLocator="//blockquote/form/table/tbody/tr[2]/td[2]/input"
         modemNetMask = "255.255.255.0"
-        wd.find_element_by_xpath(modemNetMaskLocator).click()
-        wd.find_element_by_xpath(modemNetMaskLocator).clear()        
-        wd.find_element_by_xpath(modemNetMaskLocator).send_keys(modemNetMask)
-        # press next
+        
+        
+        login(adminUser, adminPassword)
+        setPortNum(portNum)
+        setVpi(vpiNum)
+        setVci(vciNum)
+        enableQoS()
+        clickNextButton()
+        selectBridgingMode()
+        enableBridgeService()
+        setServiceName(serviceName)
         clickNextButton2()
-        # press next
+        setModemIP(modemIP)
+        setModemNetMask(modemNetMask)
+        clickNextButton2()
         clickNextButton2()
         
     finally:
