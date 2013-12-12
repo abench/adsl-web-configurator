@@ -44,13 +44,15 @@ def clickButton(wd, locator):
     wd.find_element_by_xpath(locator).click()      
 
 
-def clickNextButton2():
-    return wd.find_element_by_xpath(nextButton2Locator).click()
   
     
 def unselectCheckBox(wd, locator):
     if wd.find_element_by_xpath(locator).is_selected():
         wd.find_element_by_xpath(locator).click()
+        
+        
+def clickNextButton2():
+    return clickButton(wd, nextButton2Locator)
 
 
 def setPortNum(num):

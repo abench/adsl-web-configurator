@@ -35,6 +35,7 @@ nextButton2Locator = "//blockquote/form/center/input[2]"
 serviceNameLocator = "//blockquote/form/table/tbody/tr[2]/td[2]/input"
 modemIPLocator = "//blockquote/form/table/tbody/tr[1]/td[2]/input"
 modemNetMaskLocator="//blockquote/form/table/tbody/tr[2]/td[2]/input"
+startPageLocator ="http://%s:%s@192.168.1.1/"
 
 
 
