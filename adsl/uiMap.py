@@ -5,10 +5,12 @@ Created on Dec 12, 2013
 '''
 
 import csv
+from util.configParser import parseConfig
 
 class uiMap():
-    def __init__(self):
-        self.locators=None
+    def __init__(self,name):
+        self.locators={}
+        self.loadFromFile(name)
         return
     def get(self,locatorName):
         if self.locators!=None:
@@ -19,7 +21,4 @@ class uiMap():
         self.locators[locatorName]=value
         
     def loadFromFile(self,fname):
-        with open(fname, 'rb') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                self.locators.set(row[0],row[1])       
+        self.locators = parseConfig(fname)

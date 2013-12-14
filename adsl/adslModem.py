@@ -9,9 +9,9 @@ from adsl.webHelper import webHelper as webHelper
 from adsl.uiMap import uiMap as uiMap
 
 class adslModem():
-    def __init__(self):
-        self.map =uiMap.__init__(self)  
-        self.browser = webHelper.__init__(self)
+    def __init__(self,name):
+        self.map =uiMap(name)  
+        self.browser = webHelper()
         
     def clickNextButton2(self):
         self.browser.clickButton(self.map.get("nextButton2Locator"))    
