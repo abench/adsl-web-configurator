@@ -50,5 +50,28 @@ class adslModem():
     
     
     def setModemNetMask(self,modemNetMask):
-        self.browser.setText(self.map.get("modemNetMaskLocator"), modemNetMask)  
+        self.browser.setText(self.map.get("modemNetMaskLocator"), modemNetMask)
+        
+    def selectPppoe(self):
+        self.browser.clickButton(self.map.get("pppoeSelectLocator"))
+
+
+    def clickNextButton3(self,):
+        self.browser.clickButton(self.map.get("nextButton3Locator"))
+    
+    
+    def setPppoeUserName(self, pppoeUserName):
+        self.browser.setText(self.map.get("pppoeUsernameLocator"), pppoeUserName)
+    
+    
+    def setPppoeUserPassword(self, pppoeUserPassword):
+        self.browser.setText(self.map.get("pppoePasswordLocator"), pppoeUserPassword)
+        
+    
+    
+    def confirmPppoeUserPassword(self, pppoeUserPassword):
+        self.browser.setText(self.map.get("pppoePasswordConfirmLocator"), pppoeUserPassword)
+        
+        
+          
     
